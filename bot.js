@@ -1,216 +1,539 @@
 const Discord = require('discord.js');
-const devs = ['389090790984515594'];
-var prefix = "!";
-const adminprefix = "!"
-const db = require('quick.db');
-const client = new Discord.Client();   
-const giphy = require('giphy-api')();    
-const googl = require('goo.gl');  
-const translate = require('google-translate-api');   
-const fs = require("fs"); 
-const canvas = require("canvas");
-const getYoutubeID = require('get-youtube-id'); 
-const moment = require("moment");  
-const { Client, Util } = require('discord.js');  
-const UserBlocked = new Set(); 
-const jimp = require('jimp');   
-const math = require('math-expression-evaluator'); 
-const stripIndents = require('common-tags').stripIndents;
-const figlet = require('figlet');
-const google = require('google-it'); 
-const queue = new Map(); 
-const zalgo = require('zalgolize');   
-const fetchVideoInfo = require('youtube-info');
-const YouTube = require('simple-youtube-api');
-const ytdl = require('ytdl-core');
-const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
-const sql = require("sqlite");
- const dateFormat = require('dateformat'); 
- const pretty = require('pretty-ms') 
-
-,ti={}  
-,spee={};
+const client = new Discord.Client();
+const prefix = "-"
 
 
- 
-        client.on('message', async message => {
-            if(message.content.includes('discord.gg')){
-                if(message.member.hasPermission("MANAGE_GUILD")) return;
-        if(!message.channel.guild) return;
-        message.delete()
-          var command = message.content.split(" ")[0];
-    let muterole = message.guild.roles.find(`name`, "Muted");
-    if(!muterole){
-      try{
-        muterole = await message.guild.createRole({
-          name: "Muted",
-          color: "#000000",
-          permissions:[]
-        })
-        message.guild.channels.forEach(async (channel, id) => {
-          await channel.overwritePermissions(muterole, {
-            SEND_MESSAGES: false,
-            ADD_REACTIONS: false
-          });
-        });
-      }catch(e){
-        console.log(e.stack);
-      }
-    }
-           if(!message.channel.guild) return message.reply('** This command only for servers**');
-     message.member.addRole(muterole);
-    const embed500 = new Discord.RichEmbed()
-      .setTitle("Muted Ads")
-            .addField(`**  You Have Been Muted **` , `**Reason : Sharing Another Discord Link**`)
-            .setColor("c91616")
-            .setThumbnail(`${message.author.avatarURL}`)
-            .setAuthor(message.author.username, message.author.avatarURL)
-        .setFooter(`${message.guild.name} `)
-     message.channel.send(embed500)
-     message.author.send('` انت معاقب ميوت شاتي بسبب نشر سرفرات ان كان عن طريق الخطا **ف** تكلم مع الادارة `');
-   
-       
-    }
-})
-
-client.on('message', async function(message) {
-    	 if (!message.channel.guild) return;
-let muteRole1 = message.guild.roles.find("name", "Muted");
-     if (!muteRole1) return;
-  if (message.author.id == client.user.id) return;
-  if(JSON.stringify(user).indexOf(message.author.id) == -1) {
-    user[message.author.id] = message.createdTimestamp;
-    return;
-  } else {
-    if (Date.now() - user[message.author.id] < 695){
-              message.author.delete
-      if (JSON.stringify(warn).indexOf(message.author.id) == -1) {
-        warn[message.author.id] = 1;
-      } else {
-        warn[message.author.id]++;
-        message.author.delete
-      }
-      if (warn[message.author.id] < 6) {
-        message.author.delete
-
-      }
-      delete user[message.author.id];
-              message.author.delete
-
-    } else {
-      delete user[message.author.id];
-              message.author.delete
-
-    }
-  }
-  if (warn[message.author.id] == 6) {
-     if (!message.channel.guild) return;
-             message.author.delete
-
-let muteRole1 = message.guild.roles.find("name", "Muted");
-if(!muteRole1) {
-        muteRole1 = await message.guild.createRole({
-          name: "Muted",
-          color: "#ffffff",
-          permissions:[]
-        })
-        message.guild.channels.forEach(async (channel, id) => {
-          await channel.overwritePermissions(muteRole1, {
-            SEND_MESSAGES: false,
-            ADD_REACTIONS: false,
-			READ_MESSAGES_HISTORY:false
-        });
-		});
-  }
-     if (!muteRole1) return;
-    var guild = message.channel.guild;
-          var currentTime = new Date(),
-            Year = currentTime.getFullYear(),
-            Month = currentTime.getMonth() + 1,
-            Day = currentTime.getDate(),
-            hours = currentTime.getHours() + 3 ,
-            minutes = currentTime.getMinutes()+1,
-            seconds = currentTime.getSeconds();
-
-           if (!message.channel.guild) return;
-     if (!muteRole1) return;
-    var guild = message.channel.guild;
-    message.guild.members.get(message.author.id).addRole(muteRole1);
-	setTimeout(function(){
-		    message.guild.members.get(message.author.id).removeRole(muteRole1);
-	},7200000);
-     var msg;
-        msg = parseInt();
-      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
-delete warn[message.author.id];
-    delete user[message.author.id];
-	const embed500 = new Discord.RichEmbed()
-     .setTitle(`mark:  | There is someone trying `)
-      .setDescription(":white_check_mark:  | `There is someone trying to do spam`\n\nName:\n"+`${message.author.username}#${message.author.discriminator}`+"\nThe required procedures have been taken")      .setColor("ff0000")
-    message.channel.send(embed500)
-    	const embed20 = new Discord.RichEmbed()
-      .setTitle(":scales: | you are punished")
-      .setDescription(`**You have been Muted **\n\nBy:\n${client.user.tag}\n\nThe reason:\nSpam Chat\n\nMuted Date:\n`+ Year + "/" + Month + "/" + Day +', '+hours +'-' +minutes+'-'+seconds+"\n \n \n`If the punishment by mistake continues with the administration \n\nTime of unmute : Two hours after the date of the death`")
-          .setFooter(message.guild.iconURL)
-      .setColor("ff0000")
-
-     message.author.send(embed20)
-
-  }
+console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
+console.log('         [Wait please .. ]       ')
+console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
+client.on('ready', () => {
+	console.log('')
+	console.log('')
+	console.log('')
+	console.log('')
+	console.log('')
+	console.log('')
+	console.log('')
+	console.log('')
+  console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
+  console.log(`Logged in as [ ${client.user.tag}! ]`);
+  console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
+  console.log('[           BOT IS ONLINE         ]')
+  console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
+  console.log('[        info         ]')
+  console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
+  console.log(`servers! [ " ${client.guilds.size} " ]`);
+  console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
+  console.log(`Users! [ " ${client.users.size} " ]`);
+  console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
+  console.log(`channels! [ " ${client.channels.size} " ]`);
+  console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
 });
-let bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
-let banse = new Set();
-client.on('guildBanAdd', function(guild) {
-  guild.fetchAuditLogs().then(logs => {
-    const ser = logs.entries.first().executor;
-    if(!bane[ser.id+guild.id]) bane[ser.id+guild.id] = {
-      bans: 2
-    }
-    let boner = bane[ser.id+guild.id]
-banse.add(ser.id)
-boner.bans = Math.floor(boner.bans+1)
+ const devs = ['389090790984515594'];
+const adminprefix = "-"
 
-
-setTimeout(() => {
-  boner.bans = 2
-  banse.delete(ser.id)
-},8000)
-
-if(boner.bans > 2) {
-  let roles = guild.members.get(ser.id).roles.array()
-guild.members.get(ser.id).removeRoles(roles)
-}
-
-    })
-    fs.writeFile('./bcer.json', JSON.stringify(bane), (err) => {
-if (err) console.error(err);
-})
-
-})
 
 client.on('message', message => {
-  var argresult = message.content.split(` `).slice(1).join(' ');
-    if (!devs.includes(message.author.id)) return;
+    if(message.content.startsWith(prefix + "share")) {
+		
+		
+		
+	    let rank = message.guild.member(message.author).roles.find('name', '⇒ Support');
+        if (!rank) return message.channel.send('🛑 **| يجب ان تمتلك رتبة سبورت  لأستخدام هذا الأمر.**');
+		
+		message.channel.send('**:x: لا يمكن استعمال هذا الامر الا في روم نشر الاكواد**');
+		if(message.channel.id !== '485339888187736071','487146253000638465','488853384741257237') return; // ايدي روم نشر الاكواد :)
+        let embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .addField('     **=-=-:: [ share system ] ::-=-=** ' ,'╔[❖═════════════════════❖]╗')
+        .addField('**- A لنشر الأكواد بلغة الجافا سكربت**' ,'**=-=-=-=-=-=-=-=-=-=-=**')
+        .addField('**- B لنشر الأكواد بلغة البايثون**' ,'**=-=-=-=-=-=-=-=-=-=-=**')
+        .addField('**- C لنشر الأكواد بلغة الآي أو **' ,'**=-=-=-=-=-=-=-=-=-=-=**')
+        .addField('**- D لنشر الأكواد بلغة الإرس **' ,'**=-=-=-=-=-=-=-=-=-=-=**')  
+        .addField('**- E لنشر الأكواد بلغة HTML **' ,'**=-=-=-=-=-=-=-=-=-=-=**')
+
+	
+		.addField('**- E لنشر الثيمات في بيتر ديسكورد **' ,'**=-=-=-=-=-=-=-=-=-=-=**')
+        .addField('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=' ,'╚[❖═════════════════════❖]╝')
+        .setFooter(`Alpha codes`)
+        .setTimestamp()
+        message.channel.sendEmbed(embed).then(msg => {
     
-if (message.content.startsWith(adminprefix + 'playing1')) {
-  client.user.setGame(argresult);
-    message.channel.sendMessage(`**${argresult} تم تغيير بلاينق البوت إلى **`)
-} else 
-  if (message.content.startsWith(adminprefix + 'namebot1')) {
-client.user.setUsername(argresult).then
-    message.channel.sendMessage(`**${argresult}** : تم تغيير أسم البوت إلى`)
-return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
-} else
-  if (message.content.startsWith(adminprefix + 'avatarbot1')) {
-client.user.setAvatar(argresult);
-  message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
-      } else     
-if (message.content.startsWith(adminprefix + 'streem1')) {
-  client.user.setGame(argresult, "https://www.twitch.tv/idk");
-    message.channel.sendMessage(`**تم تغيير تويتش البوت إلى  ${argresult}**`)
-}
+            msg.react('🇦').then( r => {
+                msg.react('🇧')
+                msg.react('🇨')
+                msg.react('🇩')
+				msg.react('🇪')
+            let sharejsFilter = (reaction, user) => reaction.emoji.name === '🇦' && user.id === message.author.id;
+            let sharepyFilter = (reaction, user) => reaction.emoji.name === '🇧' && user.id === message.author.id;
+            let shareioFilter = (reaction, user) => reaction.emoji.name === '🇨' && user.id === message.author.id;
+            let shareerisFilter = (reaction, user) => reaction.emoji.name === '🇩' && user.id === message.author.id;
+			let sharebeterFilter = (reaction, user) => reaction.emoji.name === '🇪' && user.id === message.author.id;
+
+    
+            let sharejs = msg.createReactionCollector(sharejsFilter, { time: 20000});
+            let sharepy = msg.createReactionCollector(sharepyFilter, { time: 20000});
+            let shareio = msg.createReactionCollector(shareioFilter, { time: 20000});
+            let shareeris = msg.createReactionCollector(shareerisFilter, { time: 20000});
+			let sharebeter = msg.createReactionCollector(sharebeterFilter, { time: 20000});
+		
+		
+        sharebeter.on('collect', r => {
+			msg.delete()
+      let filter = m => m.author.id === message.author.id;
+      let thisMessage;
+      let thisFalse;
+    let beterdi = message.guild.channels.find(`name`, "✻-themes");
+    if(!beterdi) return message.channel.send("❌لم اجد الروم الخاص بنشر الثيمات");
+	message.channel.send('📝 **| من فضلك قم بوضع رابط الثيم الآن... ✏ **').then(msg => {
+
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+      .then(collected => {
+        collected.first().delete();
+		thisMessage = collected.first().content;
+		boi = collected.first().content;
+		let boi2;
+     msg.edit('📜 **| من فضلك قم بكتابة وصف الثيم... ✏ **').then(msg => {
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+        .then(collected => {
+        collected.first().delete();
+        boi = collected.first().content;
+		let boi2;
+	msg.edit('🤵 **| من فضلك اكتب من صنع هذا الثيم... ✏ **').then(msg => {
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+                .then(collected => {
+                  collected.first().delete();
+                boi2 = collected.first().content;
+				msg.delete()
+
+ message.channel.send('**| يرجى الإنتظار بضع ثواني... ✏**').then(b => {
+        setTimeout(() => {
+  b.edit(`**:dove:| Done :white_check_mark:, تم بنجاح نشر الثيم في روم الثيمات**`)
+        },5000);
+var beterdi = message.guild.channels.find('name', '✻-themes')
+if(!beterdi) return;
+if(beterdi) {
+beterdi.send(`@everyone | @here
+**AlphaCodes© <:js:482928068198137857>**
+\`\`\`js
+${thisMessage}\`\`\`
+**وصف الثيم**: ${boi}
+**تم النشر بواسطة**: ${message.author}
+**المصدر / الشخص الذي صنع الثيم**: ${boi2}
+`)
+}        
+})
+})
+})
+})
+})
+})
+})
+
+})
+
+		
+        sharejs.on('collect', r => {
+			msg.delete()
+      let filter = m => m.author.id === message.author.id;
+      let thisMessage;
+      let thisFalse;
+    let jscodes = message.guild.channels.find(`name`, "✻-discord-js");
+    if(!jscodes) return message.channel.send("❌لم اجد الروم الخاص بنشر الاكواد");
+	message.channel.send('📝 **| من فضلك اكتب الكود الأن... ✏ **').then(msg => {
+
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+      .then(collected => {
+        collected.first().delete();
+		thisMessage = collected.first().content;
+		boi = collected.first().content;
+		let boi2;
+     msg.edit('📜 **| من فضلك اكتب وصف الكود الأن... ✏ **').then(msg => {
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+        .then(collected => {
+        collected.first().delete();
+        boi = collected.first().content;
+		let boi2;
+	msg.edit('🤵 **| من فضلك اكتب من صنع هذا الكود الأن... ✏ **').then(msg => {
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+                .then(collected => {
+                  collected.first().delete();
+                boi2 = collected.first().content;
+				msg.delete()
+
+ message.channel.send('**| يرجى الإنتظار بضع ثواني... ✏**').then(b => {
+        setTimeout(() => {
+  b.edit(`**:dove:| Done :white_check_mark:, تم بنجاح نشر كودك في روم الاكواد**`)
+        },5000);
+var jscodes = message.guild.channels.find('name', '✻-discord-js')
+if(!jscodes) return;
+if(jscodes) {
+jscodes.send(`@everyone | @here
+**AlphaCodes© <:js:482928068198137857>**
+\`\`\`js
+${thisMessage}\`\`\`
+**وصف الكود**: ${boi}
+**تم النشر بواسطة**: ${message.author}
+**المصدر / الشخص الذي صنع الكود**: ${boi2}
+`)
+}        
+})
+})
+})
+})
+})
+})
+})
+
+})
+
+ 
+          shareeris.on('collect', r => {
+			  msg.delete()
+      let filter = m => m.author.id === message.author.id;
+      let thisMessage;
+      let thisFalse;
+    var eriscodes = message.guild.channels.find(`name`, "✻-discord-eris");
+    if(!eriscodes) return message.channel.send("❌لم اجد الروم الخاص بنشر الاكواد");
+	message.channel.send('📝 **| من فضلك اكتب الكود الأن... ✏ **').then(msg => {
+
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+      .then(collected => {
+        collected.first().delete();
+		thisMessage = collected.first().content;
+		boi = collected.first().content;
+		let boi2;
+     msg.edit('📜 **| من فضلك اكتب وصف الكود الأن... ✏ **').then(msg => {
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+        .then(collected => {
+        collected.first().delete();
+        boi = collected.first().content;
+		let boi2;
+	msg.edit('🤵 **| من فضلك اكتب من صنع هذا الكود الأن... ✏ **').then(msg => {
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+                .then(collected => {
+                  collected.first().delete();
+                boi2 = collected.first().content;
+				msg.delete()
+
+ message.channel.send('**| يرجى الإنتظار بضع ثواني... ✏**').then(b => {
+        setTimeout(() => {
+  b.edit(`**:dove:| Done :white_check_mark:, تم بنجاح نشر كودك في روم الاكواد**`)
+        },5000);
+var eriscodes = message.guild.channels.find('name', '✻-discord-eris')
+if(!eriscodes) return;
+if(eriscodes) {
+eriscodes.send(`@everyone | @here
+**AlphaCodes© <:js:482928068198137857>**
+\`\`\`js
+${thisMessage}\`\`\`
+**وصف الكود**: ${boi}
+**تم النشر بواسطة**: ${message.author}
+**المصدر / الشخص الذي صنع الكود**: ${boi2}
+`)
+}        
+})
+})
+})
+})
+})
+})
+})
+
+})
+
+
+         shareio.on('collect', r => {
+			 msg.delete()
+      let filter = m => m.author.id === message.author.id;
+      let thisMessage;
+      let thisFalse;
+    var iocodes = message.guild.channels.find(`name`, "✻-discord-io");
+    if(!iocodes) return message.channel.send("❌لم اجد الروم الخاص بنشر الاكواد");
+	message.channel.send('📝 **| من فضلك اكتب الكود الأن... ✏ **').then(msg => {
+
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+      .then(collected => {
+        collected.first().delete();
+		thisMessage = collected.first().content;
+		boi = collected.first().content;
+		let boi2;
+     msg.edit('📜 **| من فضلك اكتب وصف الكود الأن... ✏ **').then(msg => {
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+        .then(collected => {
+        collected.first().delete();
+        boi = collected.first().content;
+		let boi2;
+	msg.edit('🤵 **| من فضلك اكتب من صنع هذا الكود الأن... ✏ **').then(msg => {
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+                .then(collected => {
+                  collected.first().delete();
+                boi2 = collected.first().content;
+				msg.delete()
+
+ message.channel.send('**| يرجى الإنتظار بضع ثواني... ✏**').then(b => {
+        setTimeout(() => {
+  b.edit(`**:dove:| Done :white_check_mark:, تم بنجاح نشر كودك في روم الاكواد**`)
+        },5000);
+var iocodes = message.guild.channels.find('name', '✻-discord-io')
+if(!iocodes) return;
+if(iocodes) {
+iocodes.send(`@everyone | @here
+**AlphaCodes© <:js:482928068198137857>**
+\`\`\`js
+${thisMessage}\`\`\`
+**وصف الكود**: ${boi}
+**تم النشر بواسطة**: ${message.author}
+**المصدر / الشخص الذي صنع الكود**: ${boi2}
+`)
+}        
+})
+})
+})
+})
+})
+})
+})
+
+})
+
+
+   
+        sharepy.on('collect', r => {
+			msg.delete()
+      let filter = m => m.author.id === message.author.id;
+      let thisMessage;
+      let thisFalse;
+    var pycodes = message.guild.channels.find(`name`, "✻-discord-py");
+    if(!pycodes) return message.channel.send("❌لم اجد الروم الخاص بنشر الاكواد");
+	message.channel.send('📝 **| من فضلك اكتب الكود الأن... ✏ **').then(msg => {
+
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+      .then(collected => {
+        collected.first().delete();
+		thisMessage = collected.first().content;
+		boi = collected.first().content;
+		let boi2;
+     msg.edit('📜 **| من فضلك اكتب وصف الكود الأن... ✏ **').then(msg => {
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+        .then(collected => {
+        collected.first().delete();
+        boi = collected.first().content;
+		let boi2;
+	msg.edit('🤵 **| من فضلك اكتب من صنع هذا الكود الأن... ✏ **').then(msg => {
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+                .then(collected => {
+                  collected.first().delete();
+                boi2 = collected.first().content;
+				msg.delete()
+ message.channel.send('**| يرجى الإنتظار بضع ثواني... ✏**').then(b => {
+        setTimeout(() => {
+  b.edit(`**:dove:| Done :white_check_mark:, تم بنجاح نشر كودك في روم الاكواد**`)
+        },5000);
+		
+
+var pycodes = message.guild.channels.find('name', '✻-discord-py')
+if(!pycodes) return;
+if(pycodes) {
+pycodes.send(`@everyone | @here
+**AlphaCodes© <:js:482928068198137857>**
+\`\`\`js
+${thisMessage}\`\`\`
+**وصف الكود**: ${boi}
+**تم النشر بواسطة**: ${message.author}
+**المصدر / الشخص الذي صنع الكود**: ${boi2}
+`)
+}        
+})
+})
+})
+})
+})
+})
+})
+
+})
+
+
+        })
+        })
+
+    }
 });
 
+// ✅
+
+
+
+//  =-=-=-=-=-=- .::[ Take Codes System - abokhalil ]::. =-=-=-=-=-=-
+
+		
+
+client.on('message', message => {
+    if(message.content.startsWith(prefix +"تقديم")) {
+
+        let embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .addField('     **=-=-:: [ share system ] ::-=-=** ' ,'╔[❖═════════════════════❖]╗')
+        .addField(' ** A للتقديم على رتبة السبورت في مجال الجافا سكربت  **' ,'**=-=-=-=-=-=-=-=-=-=-=**')
+        .addField('**- B للتقديم على رتبة السبورت في مجال البايثون**' ,'**=-=-=-=-=-=-=-=-=-=-=**')
+        .addField('**- C html للتقديم على رتبة السبورت في مجال **' ,'**=-=-=-=-=-=-=-=-=-=-=**')
+        .addField('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=' ,'╚[❖═════════════════════❖]╝')
+        .setFooter(`Alpha codes`)
+        .setTimestamp()
+        message.channel.sendEmbed(embed).then(msg => {
+
+            msg.react('🇦').then( r => {
+                msg.react('🇧')
+                msg.react('🇨')
+                msg.react('🇩')
+
+
+            let tqjsFilter = (reaction, user) => reaction.emoji.name === '🇦' && user.id === message.author.id;
+            let tqpyFilter = (reaction, user) => reaction.emoji.name === '🇧' && user.id === message.author.id;
+            let tqhtmlFilter = (reaction, user) => reaction.emoji.name === '🇨' && user.id === message.author.id;
+
+            let taqjs = msg.createReactionCollector(tqjsFilter, { time: 20000});
+            let taqpy = msg.createReactionCollector(tqpyFilter, { time: 20000});
+            let taqhtml = msg.createReactionCollector(tqhtmlFilter, { time: 20000});
+
+
+
+        taqjs.on('collect', r => {
+			msg.delete()
+      let filter = m => m.author.id === message.author.id;
+      let thisMessage;
+      let thisFalse;
+	message.channel.send('📝 **| من فضلك قم بكتابة اسمك.. **').then(msg => {
+
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+      .then(collected => {
+        collected.first().delete();
+		thisMessage = collected.first().content;
+		boi = collected.first().content;
+		let boi2;
+     msg.edit('📜 **| ما هو الفرق بين var , const , let ? ... ✏ **').then(msg => {
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+        .then(collected => {
+        collected.first().delete();
+        boi = collected.first().content;
+		let boi2;
+	msg.edit('🤵 **| من فضلك الان قم بوضع 4 ايفنتات ... كمثال client.ready  ✏ **').then(msg => {
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+                .then(collected => {
+                  collected.first().delete();
+                boi2 = collected.first().content;
+				msg.delete()
+
+ message.channel.send('**| يرجى الإنتظار بضع ثواني... ✏**').then(b => {
+        setTimeout(() => {
+  b.edit(`**:dove:| Done :white_check_mark:, تم بنجاح ايصال تقديمك للادارة**`)
+        },5000);
+var jscodes = message.guild.channels.find('name', 'submite-list')
+if(!jscodes) return;
+if(jscodes) {
+jscodes.send(`
+**AlphaCodes©**
+تقديم في مجال الجافا سكربت
+
+
+الاسم الكامل :
+${thisMessage}
+**الفرق بين var , const , let**:
+ ${boi}
+**صاحب التقديم**: ${message.author}
+**4 ايفنتات**:
+ ${boi2}
+`)
+}
+})
+})
+})
+})
+})
+})
+})
+
+})
+
+
+
+
+        taqpy.on('collect', r => {
+			msg.delete()
+      let filter = m => m.author.id === message.author.id;
+      let thisMessage;
+      let thisFalse;
+	message.channel.send('📝 **| من فضلك قم بكتابة اسمك.. **').then(msg => {
+
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+      .then(collected => {
+        collected.first().delete();
+		thisMessage = collected.first().content;
+		boi = collected.first().content;
+		let boi2;
+     msg.edit('📜 **| ما معنى import ?... ✏ **').then(msg => {
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+        .then(collected => {
+        collected.first().delete();
+        boi = collected.first().content;
+		let boi2;
+	msg.edit('🤵 **| من فضلك الان قم بوضع 4 ايفنتات ... كمثال client.ready  ✏ **').then(msg => {
+     message.channel.awaitMessages(filter, { max: 1, time: 90000, errors: ['time'] })
+                .then(collected => {
+                  collected.first().delete();
+                boi2 = collected.first().content;
+				msg.delete()
+
+ message.channel.send('**| يرجى الإنتظار بضع ثواني... ✏**').then(b => {
+        setTimeout(() => {
+  b.edit(`**:dove:| Done :white_check_mark:, تم بنجاح ايصال تقديمك للادارة**`)
+        },5000);
+var jscodes = message.guild.channels.find('name', 'submite-list')
+if(!jscodes) return;
+if(jscodes) {
+jscodes.send(`
+**AlphaCodes©**
+تقديم في مجال البايثون
+
+الاسم الكامل :
+${thisMessage}
+**معنى import**:
+ ${boi}
+**صاحب التقديم**: ${message.author}
+**4 ايفنتات**:
+ ${boi2}
+`)
+}
+})
+})
+})
+})
+})
+})
+})
+
+})
+
+
+
+
+        taqhtml.on('collect', r => {
+			msg.delete()
+			message.channel.send('**قريبا بإذن الله**')
+})
+
+        })
+        })
+
+    }
+});
+
+
+client.on("ready", () => {
+    client.user.setPresence({ game: { name: `Alpha codes` }, type: 0 });
+    console.log("Disco role bot online! Created by i am toast.");
+});
 
 
 client.login(process.env.BOT_TOKEN);
